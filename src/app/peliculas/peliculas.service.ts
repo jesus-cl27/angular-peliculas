@@ -38,39 +38,27 @@ export class PeliculasService  {
     return this.http.post<PeliculaDTO>(this.urlBase, formData);
   }
   private contruirFormData(pelicula: PeliculaCreacionDTO): FormData{
-        const formData = new FormData();
-        formData.append('titulo', pelicula.titulo);
-  
-        //2025-04-07T15:18:20
-        formData.append('fechaLanzamiento', pelicula.fechaLanzamiento.toISOString().split('T')[0]);
-  
-        if (pelicula.poster){
-          formData.append('poster', pelicula.poster);
-        }
-        if (pelicula.trailer){
-          formData.append('trailer', pelicula.trailer);
-        }
-        formData.append('generosIds', JSON.stringify(pelicula.generosIds));
-        formData.append('cinesIds', JSON.stringify(pelicula.cinesIds));
-        formData.append('actores', JSON.stringify(pelicula.actores));
+    const formData = new FormData();
+    formData.append('titulo', pelicula.titulo);
 
-        return formData;
-      }
-  /** 
-   * implements IServicioCRUD<PeliculaDTO,PeliculaCreacionDTO>
-  public obtenerPorId(id: number): Observable<GeneroDTO>{
-    return this.http.get<GeneroDTO>(`${this.urlBase}/${id}`);
+    //2025-04-07T15:18:20
+    formData.append('fechaLanzamiento', pelicula.fechaLanzamiento.toISOString().split('T')[0]);
 
+    if (pelicula.poster){
+      formData.append('poster', pelicula.poster);
+    }
+    if (pelicula.trailer){
+      formData.append('trailer', pelicula.trailer);
+    }
+    formData.append('generosIds', JSON.stringify(pelicula.generosIds));
+    formData.append('cinesIds', JSON.stringify(pelicula.cinesIds));
+    formData.append('actores', JSON.stringify(pelicula.actores));
+
+    return formData;
   }
-  public obtenerPaginado(paginacion: PaginacionDTO): Observable<HttpResponse<GeneroDTO[]>>{
-    let queryParams = construirQueryParams(paginacion);
-    return this.http.get<GeneroDTO[]>(this.urlBase, {params: queryParams, observe: 'response'});
-  }
-  public actualizar(id: number, genero: GeneroCreacionDTO): Observable<any>{
-    return this.http.put(`${this.urlBase}/${id}`, genero);
-  }
+  
   public borrar(id:number): Observable<any>{
     return this.http.delete(`${this.urlBase}/${id}`);
   }
-    */
+
 }
