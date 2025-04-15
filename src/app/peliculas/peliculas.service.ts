@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { IServicioCRUD } from '../compartidos/interfaces/IServicioCRUD';
-import { LandingPageDTO, PeliculaCreacionDTO, PeliculaDTO, PeliculasPostGetDTO } from './peliculas';
+import { LandingPageDTO, PeliculaCreacionDTO, PeliculaDTO, PeliculasPostGetDTO, PeliculasPutGetDTO } from './peliculas';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { PaginacionDTO } from '../compartidos/modelos/PaginacionDTO';
@@ -23,6 +23,16 @@ export class PeliculasService  {
   public crearGet(): Observable<PeliculasPostGetDTO>{
     return this.http.get<PeliculasPostGetDTO>(`${this.urlBase}/postget`);
   }
+
+  public actualizarGet(id: number): Observable<PeliculasPutGetDTO>{
+    return this.http.get<PeliculasPutGetDTO>(`${this.urlBase}/putget/${id}`);
+  }
+
+  public actualizar(id: number, pelicula: PeliculaCreacionDTO){
+    const formData = this.contruirFormData(pelicula);
+    return this.http.put(`${this.urlBase}/${id}`, formData);
+  }
+
   public crear(pelicula: PeliculaCreacionDTO): Observable<PeliculaDTO>{
     const formData = this.contruirFormData(pelicula);
     return this.http.post<PeliculaDTO>(this.urlBase, formData);

@@ -3,9 +3,10 @@ import { Component, Input, input, OnInit } from '@angular/core';
 import { ListadoGenericoComponent } from '../../compartidos/componentes/listado-generico/listado-generico.component';
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-listado-peliculas',
-  imports: [ ListadoGenericoComponent, MatButtonModule, MatIconModule],
+  imports: [ ListadoGenericoComponent, MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './listado-peliculas.component.html',
   styleUrl: './listado-peliculas.component.css'
 })
@@ -14,17 +15,7 @@ export class ListadoPeliculasComponent  {
   @Input({required: true})
   peliculas!:any[];
 
-  agregarPelicula(){
-    this.peliculas.push({
-      titulo: 'White Chicks',
-      fechaLanzamiento: new Date('2010-09-12'),
-      precio: 500
-    })
-  }
-  eliminarPelicula(pelicula: any){
-    const indice = this.peliculas.findIndex((peliculaActual: any) => peliculaActual.titulo === pelicula.titulo);
-    this.peliculas.splice(indice, 1);
-  }
+  
 
   
 
