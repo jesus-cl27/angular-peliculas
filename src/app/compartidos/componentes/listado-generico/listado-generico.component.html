@@ -1,0 +1,26 @@
+
+@if (!listado) {
+    <div #cargando>
+        <ng-content select="[cargando]"></ng-content>
+    </div>
+    @if (!cargando.innerHTML.trim()) {
+        <img src="https://miro.medium.com/max/882/1*9EBHIOzhE1XfMYoKz1JcsQ.gif" />
+    }
+  
+  }
+  @else if (listado.length === 0) {
+    <div #vacio>
+        <ng-content select="[vacio]"></ng-content>
+    </div>
+    @if (!vacio.innerHTML.trim()) {
+        <div>
+            <h4>No hay elementos</h4>
+        </div>
+    }
+  }
+  
+  @else {
+    <ng-content select="[contenido]"></ng-content>
+   
+    }
+  
