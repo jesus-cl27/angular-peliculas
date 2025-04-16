@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { IServicioCRUD } from '../compartidos/interfaces/IServicioCRUD';
 import { LandingPageDTO, PeliculaCreacionDTO, PeliculaDTO, PeliculasPostGetDTO, PeliculasPutGetDTO } from './peliculas';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { PaginacionDTO } from '../compartidos/modelos/PaginacionDTO';
 import { Observable } from 'rxjs';
@@ -22,7 +22,10 @@ export class PeliculasService  {
   public obtenerPorId(id: number): Observable<PeliculaDTO>{
     return this.http.get<PeliculaDTO>(`${this.urlBase}/${id}`);
   }
-
+  public filtrar(valores:any): Observable<HttpResponse<PeliculaDTO[]>>{
+    const params = new HttpParams({fromObject: valores});
+    return this.http.get<PeliculaDTO[]>(`${this.urlBase}/filtrar`, {params, observe: 'response'});
+  }
   
   public crearGet(): Observable<PeliculasPostGetDTO>{
     return this.http.get<PeliculasPostGetDTO>(`${this.urlBase}/postget`);

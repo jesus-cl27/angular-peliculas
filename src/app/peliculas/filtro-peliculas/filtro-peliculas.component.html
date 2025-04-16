@@ -14,7 +14,7 @@
         </mat-select>
     </mat-form-field>
     <div>
-        <mat-checkbox [formControl]="form.controls.proximosExtrenos">Proximos Estrenos</mat-checkbox>
+        <mat-checkbox [formControl]="form.controls.proximosEstrenos">Proximos Estrenos</mat-checkbox>
     </div>
     <div>
         <mat-checkbox [formControl]="form.controls.enCines">En Cines</mat-checkbox>
@@ -26,3 +26,7 @@
 </form>
 
 <app-listado-peliculas [peliculas]="peliculas"></app-listado-peliculas>
+
+<mat-paginator showFirstLastButtons [length]="cantidadTotalRegistros" [pageIndex]="paginacion.pagina"
+[pageSize]="paginacion.recordsPorPagina" [pageSizeOptions]="[5, 10, 50]" class="mat-elevation-z8"
+(page)="actualizarPaginacion($event)"></mat-paginator>
