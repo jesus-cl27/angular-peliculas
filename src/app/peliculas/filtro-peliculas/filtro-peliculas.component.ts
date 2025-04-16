@@ -15,6 +15,7 @@ import { GenerosService } from '../../generos/generos.service';
 import { PeliculasService } from '../peliculas.service';
 import { PaginacionDTO } from '../../compartidos/modelos/PaginacionDTO';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { debounce, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-filtro-peliculas',
@@ -44,7 +45,11 @@ export class FiltroPeliculasComponent implements OnInit{
       this.leerValoresURL();
       this.buscarPeliculas(this.form.value as FiltroPeliculas);
 
-      this.form.valueChanges.subscribe(valores=>{
+      this.form.valueChanges
+      .pipe(
+        debounceTime(300) //milliseconds
+      )
+      .subscribe(valores=>{
         this.buscarPeliculas(valores as FiltroPeliculas);
         this.escribirParametrosBusquedaEnURL(valores as FiltroPeliculas);
       });
