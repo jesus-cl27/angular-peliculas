@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class RatingService {
 
   constructor() { }
-  private urlBase = environment.apiURL + '/rating';
+  private urlBase = environment.apiURL + '/ratings';
   private http = inject(HttpClient);
 
   puntuar(peliculaId: number, puntuacion: number){

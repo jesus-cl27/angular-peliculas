@@ -34,6 +34,9 @@ export class SeguridadService {
     localStorage.setItem(this.llaveToken, respuestaAutenticacionDTO.token);
     localStorage.setItem(this.llaveExpiracion, respuestaAutenticacionDTO.expiracion.toString());
   }
+  obtenerToken(): string | null{
+    return localStorage.getItem(this.llaveToken);
+  }
 
   obtenerCampoJWT(campo: string): string{
     const token = localStorage.getItem(this.llaveToken);
